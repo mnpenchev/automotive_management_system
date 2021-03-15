@@ -12,7 +12,7 @@
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 150%;
 }
 td, th {
   border: 1px solid #dddddd;
@@ -28,14 +28,22 @@ tr:nth-child(even) {
     <th>Car model</th>
     <th>Type</th>
     <th>Color</th>
+    <th>Derivative</th>
     <th>Date produced</th>
+    <th>VIN</th>
+    <th>Currently available</th>
+    <th>Owner</th>
   </tr>
     {% for car in factory.car_set.all %}
   <tr>
     <td>{{ car.model }}</td>
     <td>{{ car.type }}</td>
     <td>{{ car.color }}</td>
+    <td>{{ car.derivative }}</td>
     <td>{{ car.produced }}</td>
+    <td>{{ car.vin }}</td>
+    <td>{{ car.currently_available }}</td>
+    <td>{{ car.car_owner }}</td>
   </tr>
 	{% endfor %}
 </table>

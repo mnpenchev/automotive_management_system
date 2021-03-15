@@ -1,5 +1,7 @@
+import csv, io
 from django.http import Http404
 from django.shortcuts import render
+from django.contrib import messages
 from .models import Factory, Car, Dealership, Client
 
 
@@ -36,3 +38,31 @@ def dealershipDetailView(request, dealership_id):
         raise Http404("Does not exist")
     return render(request, 'dealership/dealership_detail.html',
                   {'dealership': dealership_detail_view})
+
+
+def upload_view(request):
+    """ View function that allows uploading csv files and import the data to the database (sqlite)"""
+    if request.method == 'GET':
+        return render(request, 'upload.html')
+
+    csv_file = request.FILES['file']
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Car.objects.update_or_create(
+            model=column[0],
+            type=column[1],
+            color=column[2],
+            derivative=column[3],
+            produced=column[4],
+            vin=column[5],
+            currently_available=column[6],
+            car_owner_id=column[7],
+        )
+
+    context = {}
+    return render(request, 'upload.html', context)

@@ -47,8 +47,10 @@ class Car(models.Model):
     type = models.CharField(max_length=255, choices=TYPE_CHOICES, default='M')
     color = models.CharField(max_length=255, choices=COLOR_CHOICES, default='white')
 
+    derivative = models.CharField(max_length=255)
     produced = models.DateField(auto_now=False)
     vin = models.CharField(max_length=25, blank=False)
+    currently_available = models.CharField(max_length=1)
     car_owner = models.ForeignKey(CarOwner, on_delete=models.CASCADE)
 
     def __str__(self):
