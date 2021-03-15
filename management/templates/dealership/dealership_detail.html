@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'dealership_url' %}">Back To Dealerships</a>
+<h1 class="text-center mb-3">{{ dealership.name }}</h1>
+<h4 class="text-center mb-3">{{ dealership.address }}</h4>
+{% if error_message %}
+<p class="alert alert-danger">
+	<strong>{{ error_message }}</strong>
+</p>
+{% endif %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 3px solid #dddddd;
+  text-align: left;
+  padding: 10px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<table>
+  <tr>
+    <th>Car model</th>
+    <th>Type</th>
+    <th>Color</th>
+    <th>Date produced</th>
+    <th>VIN</th>
+    <th>Owner</th>
+  </tr>
+    {% for car in dealership.car_set.all %}
+  <tr>
+    <td>{{ car.model }}</td>
+    <td>{{ car.type }}</td>
+    <td>{{ car.color }}</td>
+    <td>{{ car.produced }}</td>
+    <td>{{ car.vin }}</td>
+    <td>{{ car.car_owner }}</td>
+  </tr>
+	{% endfor %}
+</table>
+<br>
+{% endblock %}

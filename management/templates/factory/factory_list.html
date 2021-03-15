@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'index' %}">Home</a>
+  <h1 class="text-center mb-3">Factories</h1>
+  {% if all_factories %}
+    {% for factory in all_factories %}
+        <div class="card-body">
+          <a href="{% url 'detailed_factory_url' factory.id %}"><h3> {{ factory.name }} </h3></a>
+        </div>
+    {% endfor %}
+  {% else %}
+  {% endif %}
+{% endblock %}

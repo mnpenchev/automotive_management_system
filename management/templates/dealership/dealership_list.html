@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'index' %}">Home</a>
+  <h1 class="text-center mb-3">Dealerships</h1>
+  {% if all_dealership %}
+    {% for dealership in all_dealership %}
+        <div class="card-body">
+          <a href="{% url 'detailed_dealership_url' dealership.id %}"><h3> {{ dealership.name }} </h3></a>
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

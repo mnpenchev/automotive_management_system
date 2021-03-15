@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AUTOMOTIVE MANAGEMENT SYSTEM</title>
+</head>
+<body>
+{% block content %}
+<h1><a class="btn btn-secondary btn-sm mb-3" href="{% url 'dealership_url' %}">To Dealerships</a></h1>
+<h1><a class="btn btn-secondary btn-sm mb-3" href="{% url 'factory_url' %}">To Factories</a></h1>
+<h1><a class="btn btn-secondary btn-sm mb-3" href="/administrator">To Admin</a></h1>
+{% endblock %}
+</body>
+</html>

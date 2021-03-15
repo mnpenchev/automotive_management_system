@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'factory_url' %}">Back To Factories</a>
+<h1 class="text-center mb-3">{{ factory.name }}</h1>
+<h4 class="text-center mb-3">{{ factory.address }}</h4>
+{% if error_message %}
+<p class="alert alert-danger">
+	<strong>{{ error_message }}</strong>
+</p>
+{% endif %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<table>
+  <tr>
+    <th>Car model</th>
+    <th>Type</th>
+    <th>Color</th>
+    <th>Date produced</th>
+  </tr>
+    {% for car in factory.car_set.all %}
+  <tr>
+    <td>{{ car.model }}</td>
+    <td>{{ car.type }}</td>
+    <td>{{ car.color }}</td>
+    <td>{{ car.produced }}</td>
+  </tr>
+	{% endfor %}
+</table>
+<br>
+<table>
+  <tr>
+    <th>Dealership name</th>
+    <th>Dealership address</th>
+  </tr>
+  {% for dealership in factory.dealership_set.all %}
+  <tr>
+    <td><a href="{% url 'detailed_dealership_url' dealership.id %}">{{ dealership.name }}</a></td>
+    <td>{{ dealership.address }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
+
